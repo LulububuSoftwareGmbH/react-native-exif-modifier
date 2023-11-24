@@ -53,11 +53,7 @@ public class ExifModifierModule extends ReactContextBaseJavaModule {
 
         // Prepare ContentValues to create a new media file
         ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, "Modified_Image.jpg");
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/YourAppName");
-        }
 
         // Insert the new file to the media store
         Uri uri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
