@@ -8,7 +8,7 @@ changes. This can be particularly useful for applications that need to manage im
 To install the package, run:
 
 ```sh
-npm install react-native-exif-modifier
+npm install @lulububu/react-native-exif-modifier
 ```
 
 ## Usage
