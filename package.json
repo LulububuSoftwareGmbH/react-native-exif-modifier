@@ -39,13 +39,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/joerndyherrn/react-native-exif-modifier",
+  "repository": "https://github.com/LulububuSoftwareGmbH/react-native-exif-modifier",
   "author": "Jörn Dyherrn <joern@dyherrn.dev> (https://github.com/joerndyherrn)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joerndyherrn/react-native-exif-modifier/issues"
+    "url": "https://github.com/LulububuSoftwareGmbH/react-native-exif-modifier/issues"
   },
-  "homepage": "https://github.com/joerndyherrn/react-native-exif-modifier#readme",
+  "homepage": "https://github.com/LulububuSoftwareGmbH/react-native-exif-modifier#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
