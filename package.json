@@ -1,5 +1,5 @@
 {
-  "name": "react-native-exif-modifier",
+  "name": "@lulububu/react-native-exif-modifier",
   "version": "0.1.0",
   "description": "Allows you to modify the exif data of an image and save it.",
   "main": "lib/commonjs/index",
