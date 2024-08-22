@@ -15,7 +15,7 @@ class ExifModifier: NSObject {
         saveImageAndModifyExif(base64ImageData: base64ImageData, properties: properties, resolve: resolve, reject: reject)
     }
 
-    @objc func saveImageAndModifyExif(base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    @objc func saveImageAndModifyExif(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         DispatchQueue.global(qos: .background).async {
             guard let imageData = Data(base64Encoded: base64ImageData) else {
                 reject("E_IMAGE_DATA", "Invalid image data", nil)
