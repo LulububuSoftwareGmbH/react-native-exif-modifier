@@ -44,7 +44,8 @@ public class ExifModifierModule extends ReactContextBaseJavaModule {
         }
     }
 
-    private void saveImageAndModifyExif(String base64ImageData, Map<String, String> exifProperties, Promise promise) throws IOException {
+    @ReactMethod
+    public void saveImageAndModifyExif(String base64ImageData, Map<String, String> exifProperties, Promise promise) throws IOException {
         Context context = getReactApplicationContext();
 
         // Decode the base64 string to a bitmap
