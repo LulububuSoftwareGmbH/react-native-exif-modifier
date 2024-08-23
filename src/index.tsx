@@ -26,7 +26,7 @@ export function saveImageWithUserComment(
 
 export function saveImageAndModifyExif(
   base64ImageData: string,
-  exifProperties: object
+  properties: object
 ): Promise<string> {
-  return ExifModifier.saveImageAndModifyExif(base64ImageData, exifProperties);
+  return ExifModifier.saveImageAndModifyExif(base64ImageData, properties);
 }
