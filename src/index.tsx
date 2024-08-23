@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import type { ImageProperties } from './constants/ImageProperties';
+import type { ImageProperties } from './interfaces/ImageProperties';
 
 const LINKING_ERROR =
   `The package 'react-native-exif-modifier' doesn't seem to be linked. Make sure: \n\n` +
