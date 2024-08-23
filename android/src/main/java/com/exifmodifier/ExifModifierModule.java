@@ -70,7 +70,7 @@ public class ExifModifierModule extends ReactContextBaseJavaModule {
         // Modify the EXIF data
         String filePath = getRealPathFromURI(context, uri);
         ExifInterface exifInterface = new ExifInterface(filePath);
-        for (Map.Entry<String, String> entry : exifProperties.entrySet()) {
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
             exifInterface.setAttribute(entry.getKey(), entry.getValue());
         }
         exifInterface.saveAttributes();
