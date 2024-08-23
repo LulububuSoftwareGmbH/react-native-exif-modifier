@@ -12,7 +12,7 @@ class ExifModifier: NSObject {
             ]
         ]
 
-        saveImageAndModifyExif(base64ImageData: base64ImageData, properties: properties, resolve: resolve, reject: reject)
+        saveImageAndModifyExif(base64ImageData, properties: properties, resolve: resolve, reject: reject)
     }
 
     @objc func saveImageAndModifyExif(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
