@@ -12,11 +12,6 @@
 export interface ImageProperties {
   UserComment?: string;
   GPSLatitude?: string;
-  GPSLatitudeRef?: string;
   GPSLongitude?: string;
-  GPSLongitudeRef?: string;
   GPSAltitude?: string;
-  GPSAltitudeRef?: string;
-  GPSTimeStamp?: string;
-  GPSDateStamp?: string;
 }

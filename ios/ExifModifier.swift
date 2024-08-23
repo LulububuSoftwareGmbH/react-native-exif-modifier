@@ -66,15 +66,21 @@ class ExifModifier: NSObject {
               kCGImagePropertyExifUserComment as String: properties["UserComment"]
           ].compactMapValues { $0 }
 
+          let latitude = properties["GPSLatitude"] as? Double
+          let longitude = properties["GPSLongitude"] as? Double
+          let altitude = properties["GPSAltitude"] as? Double
+
+          let latitudeRef = (latitude ?? 0.0) >= 0 ? "N" : "S"
+          let longitudeRef = (longitude ?? 0.0) >= 0 ? "E" : "W"
+          let altitudeRef = (altitude ?? 0.0) >= 0 ? 0 : 1
+
           let gpsProperties: [String: Any] = [
-              kCGImagePropertyGPSLatitude as String: properties["GPSLatitude"],
-              kCGImagePropertyGPSLatitudeRef as String: properties["GPSLatitudeRef"],
-              kCGImagePropertyGPSLongitude as String: properties["GPSLongitude"],
-              kCGImagePropertyGPSLongitudeRef as String: properties["GPSLongitudeRef"],
-              kCGImagePropertyGPSAltitude as String: properties["GPSAltitude"],
-              kCGImagePropertyGPSAltitudeRef as String: properties["GPSAltitudeRef"],
-              kCGImagePropertyGPSTimeStamp as String: properties["GPSTimeStamp"],
-              kCGImagePropertyGPSDateStamp as String: properties["GPSDateStamp"]
+              kCGImagePropertyGPSLatitude as String: latitude,
+              kCGImagePropertyGPSLatitudeRef as String: latitudeRef,
+              kCGImagePropertyGPSLongitude as String: longitude,
+              kCGImagePropertyGPSLongitudeRef as String: longitudeRef,
+              kCGImagePropertyGPSAltitude as String: altitude,
+              kCGImagePropertyGPSAltitudeRef as String: altitudeRef,
           ].compactMapValues { $0 }
 
           let mappedProperties: NSDictionary = [
