@@ -12,10 +12,10 @@ class ExifModifier: NSObject {
             ]
         ]
 
-        saveImageAndModifyExif(base64ImageData, properties: properties, resolve: resolve, reject: reject)
+        saveImageAndModifyProperties(base64ImageData, properties: properties, resolve: resolve, reject: reject)
     }
 
-    @objc func saveImageAndModifyExif(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    @objc func saveImageAndModifyProperties(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         DispatchQueue.global(qos: .background).async {
             guard let imageData = Data(base64Encoded: base64ImageData) else {
                 reject("E_IMAGE_DATA", "Invalid image data", nil)
@@ -58,5 +58,26 @@ class ExifModifier: NSObject {
                 }
             })
         }
+    }
+
+
+    @objc func saveImageWithProperties(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        let mappedProperties: NSDictionary = [
+            kCGImagePropertyExifDictionary as String: [
+                kCGImagePropertyExifUserComment as String: properties["UserComment"] as! String
+            ],
+            kCGImagePropertyGPSDictionary as String: [
+                kCGImagePropertyGPSLatitude as String: properties["GPSLatitude"] as! String,
+                kCGImagePropertyGPSLatitudeRef as String: properties["GPSLatitudeRef"] as! String,
+                kCGImagePropertyGPSLongitude as String: properties["GPSLongitude"] as! String,
+                kCGImagePropertyGPSLongitudeRef as String: properties["GPSLongitudeRef"] as! String,
+                kCGImagePropertyGPSAltitude as String: properties["GPSAltitude"] as! String,
+                kCGImagePropertyGPSAltitudeRef as String: properties["GPSAltitudeRef"] as! String,
+                kCGImagePropertyGPSTimeStamp as String: properties["GPSTimeStamp"] as! String,
+                kCGImagePropertyGPSDateStamp as String: properties["GPSDateStamp"] as! String,
+            ]
+        ]
+
+        saveImageAndModifyProperties(base64ImageData, properties: mappedProperties, resolve: resolve, reject: reject)
     }
 }

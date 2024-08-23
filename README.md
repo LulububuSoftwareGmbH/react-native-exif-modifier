@@ -16,20 +16,20 @@ npm install @lulububu/react-native-exif-modifier
 Import the functions from react-native-exif-modifier and use them to modify EXIF data in your images.
 
 ```js
-import { saveImageWithUserComment, saveImageAndModifyExif } from 'react-native-exif-modifier';
+import { saveImageWithUserComment, saveImageWithProperties } from 'react-native-exif-modifier';
 
 // Save image with a user comment
 const savedImagePath = await saveImageWithUserComment(base64ImageData, 'Your comment here');
 
 // Modify and save image with new EXIF data
-const modifiedImagePath = await saveImageAndModifyExif(base64ImageData, { /* EXIF properties */ });
+const modifiedImagePath = await saveImageWithProperties(base64ImageData, { /* EXIF properties */ });
 ```
 
 ## Functions
 
 * `saveImageWithUserComment(base64ImageData: string, userComment: string): Promise<string>`
   * Saves the image with the provided user comment in the EXIF data.
-* `saveImageAndModifyExif(base64ImageData: string, exifProperties: object): Promise<string>`
+* `saveImageWithProperties(base64ImageData: string, properties: ImageProperties): Promise<string>`
   * Saves the image with modified EXIF properties.
 
 ## Contributing

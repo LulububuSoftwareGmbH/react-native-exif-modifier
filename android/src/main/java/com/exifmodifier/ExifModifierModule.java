@@ -38,14 +38,14 @@ public class ExifModifierModule extends ReactContextBaseJavaModule {
             Map<String, String> properties = new HashMap<>();
 
             properties.put(ExifInterface.TAG_USER_COMMENT, userComment);
-            saveImageAndModifyExif(base64ImageData, properties, promise);
+            saveImageWithProperties(base64ImageData, properties, promise);
         } catch (Exception e) {
             promise.reject("E_IMAGE_PROCESSING", e);
         }
     }
 
     @ReactMethod
-    public void saveImageAndModifyExif(String base64ImageData, Map<String, String> exifProperties, Promise promise) throws IOException {
+    public void saveImageWithProperties(String base64ImageData, Map<String, String> properties, Promise promise) {
         Context context = getReactApplicationContext();
 
         // Decode the base64 string to a bitmap

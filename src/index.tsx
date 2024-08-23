@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { ImageProperties } from './constants/ImageProperties';
 
 const LINKING_ERROR =
   `The package 'react-native-exif-modifier' doesn't seem to be linked. Make sure: \n\n` +
@@ -24,9 +25,9 @@ export function saveImageWithUserComment(
   return ExifModifier.saveImageWithUserComment(base64ImageData, userComment);
 }
 
-export function saveImageAndModifyExif(
+export function saveImageWithProperties(
   base64ImageData: string,
-  properties: object
+  properties: ImageProperties
 ): Promise<string> {
-  return ExifModifier.saveImageAndModifyExif(base64ImageData, properties);
+  return ExifModifier.saveImageWithProperties(base64ImageData, properties);
 }

@@ -7,7 +7,7 @@ RCT_EXTERN_METHOD(saveImageWithUserComment:(NSString *)base64ImageData
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(saveImageAndModifyExif:(NSString *)base64ImageData
+RCT_EXTERN_METHOD(saveImageWithProperties:(NSString *)base64ImageData
                   properties:(NSDictionary *)properties
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
