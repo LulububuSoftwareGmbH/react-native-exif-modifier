@@ -11,11 +11,11 @@
 
 export interface ImageProperties {
   UserComment?: string;
-  GPSLatitude?: number;
+  GPSLatitude?: string;
   GPSLatitudeRef?: string;
-  GPSLongitude?: number;
+  GPSLongitude?: string;
   GPSLongitudeRef?: string;
-  GPSAltitude?: number;
+  GPSAltitude?: string;
   GPSAltitudeRef?: string;
   GPSTimeStamp?: string;
   GPSDateStamp?: string;

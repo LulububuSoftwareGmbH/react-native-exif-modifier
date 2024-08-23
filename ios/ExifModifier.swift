@@ -62,21 +62,25 @@ class ExifModifier: NSObject {
 
 
     @objc func saveImageWithProperties(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        let mappedProperties: NSDictionary = [
-            kCGImagePropertyExifDictionary as String: [
-                kCGImagePropertyExifUserComment as String: properties["UserComment"] as! String
-            ],
-            kCGImagePropertyGPSDictionary as String: [
-                kCGImagePropertyGPSLatitude as String: properties["GPSLatitude"] as! String,
-                kCGImagePropertyGPSLatitudeRef as String: properties["GPSLatitudeRef"] as! String,
-                kCGImagePropertyGPSLongitude as String: properties["GPSLongitude"] as! String,
-                kCGImagePropertyGPSLongitudeRef as String: properties["GPSLongitudeRef"] as! String,
-                kCGImagePropertyGPSAltitude as String: properties["GPSAltitude"] as! String,
-                kCGImagePropertyGPSAltitudeRef as String: properties["GPSAltitudeRef"] as! String,
-                kCGImagePropertyGPSTimeStamp as String: properties["GPSTimeStamp"] as! String,
-                kCGImagePropertyGPSDateStamp as String: properties["GPSDateStamp"] as! String,
-            ]
-        ]
+          let exifProperties: [String: Any] = [
+              kCGImagePropertyExifUserComment as String: properties["UserComment"]
+          ].compactMapValues { $0 }
+
+          let gpsProperties: [String: Any] = [
+              kCGImagePropertyGPSLatitude as String: properties["GPSLatitude"],
+              kCGImagePropertyGPSLatitudeRef as String: properties["GPSLatitudeRef"],
+              kCGImagePropertyGPSLongitude as String: properties["GPSLongitude"],
+              kCGImagePropertyGPSLongitudeRef as String: properties["GPSLongitudeRef"],
+              kCGImagePropertyGPSAltitude as String: properties["GPSAltitude"],
+              kCGImagePropertyGPSAltitudeRef as String: properties["GPSAltitudeRef"],
+              kCGImagePropertyGPSTimeStamp as String: properties["GPSTimeStamp"],
+              kCGImagePropertyGPSDateStamp as String: properties["GPSDateStamp"]
+          ].compactMapValues { $0 }
+
+          let mappedProperties: NSDictionary = [
+              kCGImagePropertyExifDictionary as String: exifProperties,
+              kCGImagePropertyGPSDictionary as String: gpsProperties
+          ]
 
         saveImageAndModifyProperties(base64ImageData, properties: mappedProperties, resolve: resolve, reject: reject)
     }
