@@ -62,31 +62,34 @@ class ExifModifier: NSObject {
 
 
     @objc func saveImageWithProperties(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-          let exifProperties: [String: Any] = [
-              kCGImagePropertyExifUserComment as String: properties["UserComment"]
-          ].compactMapValues { $0 }
+        let exifProperties: [String: Any] = [
+            kCGImagePropertyExifUserComment as String: properties["UserComment"]
+        ].compactMapValues { $0 }
 
-          let latitude = properties["GPSLatitude"] as? Double
-          let longitude = properties["GPSLongitude"] as? Double
-          let altitude = properties["GPSAltitude"] as? Double
+        var gpsProperties: [String: Any] = [:]
 
-          let latitudeRef = (latitude ?? 0.0) >= 0 ? "N" : "S"
-          let longitudeRef = (longitude ?? 0.0) >= 0 ? "E" : "W"
-          let altitudeRef = (altitude ?? 0.0) >= 0 ? 0 : 1
+        if let latitude = properties["GPSLatitude"] as? String {
+            gpsProperties[kCGImagePropertyGPSLatitude as String] = latitude;
+            let latitudeRef = (Double(latitude) ?? 0.0) >= 0 ? "N" : "S"
+            gpsProperties[kCGImagePropertyGPSLatitudeRef as String] = latitudeRef;
+        }
 
-          let gpsProperties: [String: Any] = [
-              kCGImagePropertyGPSLatitude as String: latitude,
-              kCGImagePropertyGPSLatitudeRef as String: latitudeRef,
-              kCGImagePropertyGPSLongitude as String: longitude,
-              kCGImagePropertyGPSLongitudeRef as String: longitudeRef,
-              kCGImagePropertyGPSAltitude as String: altitude,
-              kCGImagePropertyGPSAltitudeRef as String: altitudeRef,
-          ].compactMapValues { $0 }
+        if let longitude = properties["GPSLongitude"] as? String {
+            gpsProperties[kCGImagePropertyGPSLongitude as String] = longitude;
+            let longitudeRef = (Double(longitude) ?? 0.0) >= 0 ? "E" : "W"
+            gpsProperties[kCGImagePropertyGPSLongitudeRef as String] = longitudeRef;
+        }
 
-          let mappedProperties: NSDictionary = [
-              kCGImagePropertyExifDictionary as String: exifProperties,
-              kCGImagePropertyGPSDictionary as String: gpsProperties
-          ]
+        if let altitude = properties["GPSAltitude"] as? String {
+            gpsProperties[kCGImagePropertyGPSAltitude as String] = altitude;
+            let altitudeRef = (Double(altitude) ?? 0.0) >= 0 ? "0" : "1"
+            gpsProperties[kCGImagePropertyGPSAltitudeRef as String] = altitudeRef;
+        }
+
+        let mappedProperties: NSDictionary = [
+            kCGImagePropertyExifDictionary as String: exifProperties,
+            kCGImagePropertyGPSDictionary as String: gpsProperties
+        ]
 
         saveImageAndModifyProperties(base64ImageData, properties: mappedProperties, resolve: resolve, reject: reject)
     }
