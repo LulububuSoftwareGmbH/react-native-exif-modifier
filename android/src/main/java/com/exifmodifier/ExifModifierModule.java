@@ -57,8 +57,8 @@ public class ExifModifierModule extends ReactContextBaseJavaModule {
 
       if (
         properties.hasKey("GPSLatitude") &&
-          properties.hasKey("GPSLongitude") &&
-          properties.hasKey("GPSAltitude")
+        properties.hasKey("GPSLongitude") &&
+        properties.hasKey("GPSAltitude")
       ) {
         double latitude = Double.parseDouble(properties.getString("GPSLatitude"));
         double longitude = Double.parseDouble(properties.getString("GPSLongitude"));
@@ -74,6 +74,18 @@ public class ExifModifierModule extends ReactContextBaseJavaModule {
 
       if (properties.hasKey("UserComment")) {
         mappedProperties.put(ExifInterface.TAG_USER_COMMENT, properties.getString("UserComment"));
+      }
+
+      if (properties.hasKey("DateTime")) {
+        mappedProperties.put(ExifInterface.TAG_DATETIME, properties.getString("DateTime"));
+      }
+
+      if (properties.hasKey("DateTimeOriginal")) {
+        mappedProperties.put(ExifInterface.TAG_DATETIME_ORIGINAL, properties.getString("DateTimeOriginal"));
+      }
+
+      if (properties.hasKey("DateTimeDigitized")) {
+        mappedProperties.put(ExifInterface.TAG_DATETIME_DIGITIZED, properties.getString("DateTimeDigitized"));
       }
 
       saveImageAndModifyProperties(base64ImageData, mappedProperties, promise);

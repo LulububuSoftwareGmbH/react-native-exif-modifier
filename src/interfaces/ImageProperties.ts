@@ -14,4 +14,7 @@ export interface ImageProperties {
   GPSLatitude?: string;
   GPSLongitude?: string;
   GPSAltitude?: string;
+  DateTime?: string;
+  DateTimeOriginal?: string;
+  DateTimeDigitized?: string;
 }

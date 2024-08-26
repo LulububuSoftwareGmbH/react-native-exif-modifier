@@ -62,9 +62,26 @@ class ExifModifier: NSObject {
 
 
     @objc func saveImageWithProperties(_ base64ImageData: String, properties: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        let exifProperties: [String: Any] = [
-            kCGImagePropertyExifUserComment as String: properties["UserComment"]
-        ].compactMapValues { $0 }
+
+        var tiffProperties: [String: Any] = [:];
+
+        if let dateTime = properties["DateTime"] as? String {
+            tiffProperties[kCGImagePropertyTIFFDateTime as String] = dateTime;
+        }
+
+        var exifProperties: [String: Any] = [:];
+
+        if let userComment = properties["UserComment"] as? String {
+            exifProperties[kCGImagePropertyExifUserComment as String] = userComment;
+        }
+        
+        if let dateTimeOriginal = properties["DateTimeOriginal"] as? String {
+            exifProperties[kCGImagePropertyExifDateTimeOriginal as String] = dateTimeOriginal;
+        }
+
+        if let dateTimeDigitalized = properties["DateTimeDigitized"] as? String {
+            exifProperties[kCGImagePropertyExifDateTimeDigitized as String] = dateTimeDigitalized;
+        }
 
         var gpsProperties: [String: Any] = [:]
 
@@ -87,6 +104,7 @@ class ExifModifier: NSObject {
         }
 
         let mappedProperties: NSDictionary = [
+            kCGImagePropertyTIFFDictionary as String: tiffProperties,
             kCGImagePropertyExifDictionary as String: exifProperties,
             kCGImagePropertyGPSDictionary as String: gpsProperties
         ]
