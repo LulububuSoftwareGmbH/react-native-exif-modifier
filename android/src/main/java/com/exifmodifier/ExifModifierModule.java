@@ -67,7 +67,7 @@ public class ExifModifierModule extends ReactContextBaseJavaModule {
         mappedProperties.put(ExifInterface.TAG_GPS_LATITUDE, convertToDMS(latitude));
         mappedProperties.put(ExifInterface.TAG_GPS_LATITUDE_REF, latitude >= 0 ? "N" : "S");
         mappedProperties.put(ExifInterface.TAG_GPS_LONGITUDE, convertToDMS(longitude));
-        mappedProperties.put(ExifInterface.TAG_GPS_LONGITUDE_REF, longitude >= 0 ? "N" : "S");
+        mappedProperties.put(ExifInterface.TAG_GPS_LONGITUDE_REF, longitude >= 0 ? "E" : "W");
         mappedProperties.put(ExifInterface.TAG_GPS_ALTITUDE, convertToRational(altitude));
         mappedProperties.put(ExifInterface.TAG_GPS_ALTITUDE_REF, altitude >= 0 ? "0" : "1");
       }
